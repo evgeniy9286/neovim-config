@@ -30,3 +30,6 @@ vim.opt.fillchars = {
 	foldsep = "│",
 	foldclose = "▸",
 }
+
+-- Templ
+vim.filetype.add({ extension = { templ = "templ" } })

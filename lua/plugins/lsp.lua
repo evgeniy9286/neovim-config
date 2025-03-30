@@ -20,7 +20,6 @@ return {
 			lspconfig.html.setup({
 				filetypes = { "html", "templ" },
 			})
-			lspconfig.htmx.setup({})
 			lspconfig.tailwindcss.setup({
 				filetypes = { "templ", "astro", "javascript", "typescript", "react", "html", "css" },
 				settings = {

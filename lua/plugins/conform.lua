@@ -10,9 +10,11 @@ return {
 					typescript = { "prettier" },
 					javascriptreact = { "prettier" },
 					typescriptreact = { "prettier" },
-					go = { "gopls" },
+					go = { "gopls", "goimports", "gofumpt" },
 					templ = {
+						"gofumpt",
 						"templ",
+						"injected",
 					},
 				},
 			})
