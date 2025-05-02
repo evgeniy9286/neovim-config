@@ -4,13 +4,13 @@ return {
 		dependencies = { "nvim-tree/nvim-web-devicons" },
 		config = function()
 			local colors = {
-				blue = "#80a0ff",
-				cyan = "#79dac8",
+				blue = "#3366ff",
+				cyan = "#2ca08b",
 				black = "#080808",
 				white = "#c6c6c6",
-				red = "#ff5189",
-				violet = "#008000",
-				grey = "#303030",
+				red = "#b30039",
+				violet = "#87CEFA",
+				grey = "#262626",
 			}
 
 			local bubbles_theme = {
@@ -20,9 +20,9 @@ return {
 					c = { fg = colors.white },
 				},
 
-				insert = { a = { fg = colors.black, bg = colors.blue } },
-				visual = { a = { fg = colors.black, bg = colors.cyan } },
-				replace = { a = { fg = colors.black, bg = colors.red } },
+				insert = { a = { fg = colors.black, bg = colors.violet } },
+				visual = { a = { fg = colors.black, bg = colors.violet } },
+				replace = { a = { fg = colors.black, bg = colors.violet } },
 
 				inactive = {
 					a = { fg = colors.white, bg = colors.black },

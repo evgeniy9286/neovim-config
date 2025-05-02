@@ -22,11 +22,10 @@ return {
 					"gopls",
 					"templ",
 					"cmake",
-					"ts_ls",
 					"html",
-					"tailwindcss",
 					"vuels",
 					"eslint",
+					"angularls",
 				},
 			})
 		end,

@@ -5,7 +5,7 @@ return {
 		config = function()
 			require("toggleterm").setup({
 				open_mapping = [[<c-\>]],
-				size = 8,
+				size = 6,
 			})
 			function _G.set_terminal_keymaps()
 				local opts = { buffer = 0 }

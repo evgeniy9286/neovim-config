@@ -10,12 +10,10 @@ return {
 					typescript = { "prettier" },
 					javascriptreact = { "prettier" },
 					typescriptreact = { "prettier" },
+					html = { "prettier" },
+					css = { "prettier" },
 					go = { "gopls", "goimports", "gofumpt" },
-					templ = {
-						"gofumpt",
-						"templ",
-						"injected",
-					},
+					templ = { "templ" },
 				},
 			})
 			vim.api.nvim_create_autocmd("BufWritePre", {

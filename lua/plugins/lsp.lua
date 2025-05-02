@@ -6,31 +6,47 @@ return {
 				disable_filetype = { "TelescopePrompt", "vim" },
 			})
 			local lspconfig = require("lspconfig")
-			lspconfig.lua_ls.setup({ settings = { Lua = { diagnostics = { globals = { "vim", "require" } } } } })
+			lspconfig.lua_ls.setup({
+				settings = { Lua = { diagnostics = { globals = { "vim", "require" } } } },
+			})
 			lspconfig.gopls.setup({
 				filetypes = { "go", "gomod", "gowork", "gotmpl" },
 			})
+			lspconfig.dockerls.setup({})
+			lspconfig.tailwindcss.setup({})
 			lspconfig.cmake.setup({})
-			lspconfig.ts_ls.setup({})
 			lspconfig.templ.setup({
-				filetypes = { "templ" },
+				filetypes = { "templ", "html", "css" },
 			})
 			lspconfig.vuels.setup({})
 			lspconfig.eslint.setup({})
 			lspconfig.html.setup({
+				cmd = { "vscode-html-language-server.cmd", "--stdio" },
 				filetypes = { "html", "templ" },
 			})
-			lspconfig.tailwindcss.setup({
-				filetypes = { "templ", "astro", "javascript", "typescript", "react", "html", "css" },
-				settings = {
-					tailwindCSS = {
-						includeLanguages = {
-							templ = "html",
-						},
-					},
-				},
+			lspconfig.cssls.setup({
+				cmd = { "vscode-css-language-server.cmd", "--stdio" },
+				filetypes = { "html", "templ", "css", "scss", "less" },
 			})
-			vim.filetype.add({ extension = { templ = "templ" } })
+			lspconfig.ts_ls.setup({
+				cmd = { "vscode-typescript-language-server.cmd", "--stdio" },
+				filetypes = { "ts", "tsx" },
+			})
+			--	lspconfig.angularls.setup({
+			--	cmd = {
+			--	"ngserver",
+			--"--stdio",
+			--"--tsProbeLocations",
+			--"../..,?/node_modules",
+			--"--ngProbeLocations",
+			--"../../@angular/language-server/node_modules,?/node_modules/@angular/language-server/node_modules",
+			--"--angularCoreVersion",
+			--"",
+			--},
+			--filetypes = { "typescript", "html", "typescriptreact", "typescript.tsx", "htmlangular" },
+			--root_markers = { "angular.json", "nx.json" },
+			--})
+			vim.cmd([[colorscheme tokyonight]])
 			vim.api.nvim_create_autocmd("LspAttach", {
 				group = vim.api.nvim_create_augroup("UserLspConfig", {}),
 				callback = function(ev)

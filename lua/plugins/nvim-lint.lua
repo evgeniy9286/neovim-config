@@ -7,7 +7,10 @@ return {
 				typescriptreact = { "eslint" },
 				javascript = { "eslint" },
 				javascriptreact = { "eslint" },
+				html = { "eslint" },
+				css = { "eslint" },
 				go = { "eslint" },
+				templ = { "eslint" },
 			}
 			vim.api.nvim_create_autocmd({ "BufWritePost" }, {
 				callback = function()
