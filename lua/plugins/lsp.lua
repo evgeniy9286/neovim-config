@@ -32,26 +32,11 @@ return {
 				cmd = { "vscode-typescript-language-server.cmd", "--stdio" },
 				filetypes = { "ts", "tsx" },
 			})
-			--	lspconfig.angularls.setup({
-			--	cmd = {
-			--	"ngserver",
-			--"--stdio",
-			--"--tsProbeLocations",
-			--"../..,?/node_modules",
-			--"--ngProbeLocations",
-			--"../../@angular/language-server/node_modules,?/node_modules/@angular/language-server/node_modules",
-			--"--angularCoreVersion",
-			--"",
-			--},
-			--filetypes = { "typescript", "html", "typescriptreact", "typescript.tsx", "htmlangular" },
-			--root_markers = { "angular.json", "nx.json" },
-			--})
 			vim.cmd([[colorscheme tokyonight]])
 			vim.api.nvim_create_autocmd("LspAttach", {
 				group = vim.api.nvim_create_augroup("UserLspConfig", {}),
 				callback = function(ev)
 					vim.bo[ev.buf].omnifunc = "v:lua.vim.lsp.omnifunc"
-
 					local opts = { buffer = ev.buf }
 					vim.keymap.set("n", "gd", vim.lsp.buf.definition, opts)
 					vim.keymap.set("n", "K", vim.lsp.buf.hover, opts)
