@@ -13,10 +13,9 @@ return {
 				filetypes = { "go", "gomod", "gowork", "gotmpl" },
 			})
 			lspconfig.dockerls.setup({})
-			lspconfig.tailwindcss.setup({})
 			lspconfig.cmake.setup({})
 			lspconfig.templ.setup({
-				filetypes = { "templ", "html", "css" },
+				filetypes = { "templ", "html", "css", "gopls" },
 			})
 			lspconfig.vuels.setup({})
 			lspconfig.eslint.setup({})
@@ -24,6 +23,20 @@ return {
 				cmd = { "vscode-html-language-server.cmd", "--stdio" },
 				filetypes = { "html", "templ" },
 			})
+
+lspconfig.htmx.setup({
+    filetypes = { "html", "templ" },
+})
+			lspconfig.tailwindcss.setup({
+filetypes = { "templ", "astro", "javascript", "typescript", "react" },
+    settings = {
+      tailwindCSS = {
+        includeLanguages = {
+          templ = "html",
+        },
+      },
+    },
+				})
 			lspconfig.cssls.setup({
 				cmd = { "vscode-css-language-server.cmd", "--stdio" },
 				filetypes = { "html", "templ", "css", "scss", "less" },
