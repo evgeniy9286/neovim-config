@@ -24,10 +24,12 @@ return {
 					"cmake",
 					"html",
 					"vuels",
-					"eslint",
-					"angularls",
-				},
+					"cssls",
+					"css_variables",
+					"emmet_ls",
+					"ts_ls"
+				}
 			})
-		end,
-	},
+		end
+	}
 }

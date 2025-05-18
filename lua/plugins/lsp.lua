@@ -1,6 +1,9 @@
 return {
 	{
 		"neovim/nvim-lspconfig",
+		configg = function()
+    require("indentmini").setup() -- use default config
+end,
 		config = function()
 			require("nvim-autopairs").setup({
 				disable_filetype = { "TelescopePrompt", "vim" },
@@ -13,37 +16,36 @@ return {
 				filetypes = { "go", "gomod", "gowork", "gotmpl" },
 			})
 			lspconfig.dockerls.setup({})
+			lspconfig.docker_compose_language_service.setup({})
 			lspconfig.cmake.setup({})
-			lspconfig.templ.setup({
-				filetypes = { "templ", "html", "css", "gopls" },
-			})
-			lspconfig.vuels.setup({})
-			lspconfig.eslint.setup({})
-			lspconfig.html.setup({
-				cmd = { "vscode-html-language-server.cmd", "--stdio" },
-				filetypes = { "html", "templ" },
-			})
-
-lspconfig.htmx.setup({
-    filetypes = { "html", "templ" },
-})
-			lspconfig.tailwindcss.setup({
-filetypes = { "templ", "astro", "javascript", "typescript", "react" },
-    settings = {
-      tailwindCSS = {
-        includeLanguages = {
-          templ = "html",
-        },
-      },
-    },
-				})
 			lspconfig.cssls.setup({
-				cmd = { "vscode-css-language-server.cmd", "--stdio" },
-				filetypes = { "html", "templ", "css", "scss", "less" },
+				cmd = { "vscode-css-language-server", "--stdio" },
+				filetypes = { "css", "scss", "less", "templ" },
+				init_options = {provideFormatter = true},
+				root_markers = { "package.json", ".git" },
+				settings = {
+							 css = {
+									 validate = true
+								   },
+							 less = {
+									 validate = true
+									},
+						     scss = {
+									 validate = true
+								    }
+							}
 			})
+			lspconfig.cssmodules_ls.setup({
+				cmd = { "cssmodules-language-server", "--stdio" },
+				filetypes = { "javascript", "javascriptreact", "typescript", "typescriptreact", "templ" },
+				root_markers = { "package.json" }
+			})
+			lspconfig.css_variables.setup({})
+			lspconfig.vls.setup({})
 			lspconfig.ts_ls.setup({
-				cmd = { "vscode-typescript-language-server.cmd", "--stdio" },
-				filetypes = { "ts", "tsx" },
+				cmd = { "typescript-language-server", "--stdio" },
+				filetypes = { "javascript", "javascriptreact", "javascript.jsx", "typescript", "typescriptreact", "typescript.tsx"},
+				root_markers = { "tsconfig.json", "jsconfig.json", "package.json", ".git" }
 			})
 			vim.cmd([[colorscheme tokyonight]])
 			vim.api.nvim_create_autocmd("LspAttach", {
