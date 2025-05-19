@@ -1,6 +1,6 @@
 return {
 	{
-		"williamboman/mason.nvim",
+		"mason-org/mason.nvim",
 		config = function()
 			require("mason").setup({
 				ui = {
@@ -12,24 +12,5 @@ return {
 				},
 			})
 		end,
-	},
-	{
-		"williamboman/mason-lspconfig.nvim",
-		config = function()
-			require("mason-lspconfig").setup({
-				ensure_installed = {
-					"lua_ls",
-					"gopls",
-					"templ",
-					"cmake",
-					"html",
-					"vuels",
-					"cssls",
-					"css_variables",
-					"emmet_ls",
-					"ts_ls"
-				}
-			})
-		end
 	}
 }

@@ -1,26 +1,44 @@
 return {
 	{
-		"stevearc/conform.nvim",
-		opts = {},
+		"akinsho/bufferline.nvim",
+		version = "*",
+		dependencies = "nvim-tree/nvim-web-devicons",
 		config = function()
-			require("conform").setup({
-				formatters_by_ft = {
-					lua = { "stylua" },
-					javascript = { "prettier" },
-					typescript = { "prettier" },
-					javascriptreact = { "prettier" },
-					typescriptreact = { "prettier" },
-					html = { "prettier" },
-					css = { "prettier" },
-					go = { "gopls", "goimports", "gofumpt" },
-					templ = { "templ" },
+			local bufferline = require("bufferline")
+
+			local gray = "#C0C0C0"
+			local links = "#DAA520"
+
+			bufferline.setup({
+				options = {
+					mode = "buffers",
+					numbers = "none",
+					color_icons = false,
+					indicator = {
+						style = "none",
+					},
+					modified_icon = "●",
+					left_trunc_marker = "",
+					right_trunc_marker = "",
+					diagnostics = "nvim_lsp",
+					always_show_bufferline = true,
 				},
-			})
-			vim.api.nvim_create_autocmd("BufWritePre", {
-				pattern = "*",
-				callback = function(args)
-					require("conform").format({ bufnr = args.buf })
-				end,
+				highlights = {
+					background = {
+						fg = gray,
+					},
+					buffer_selected = {
+						fg = links,
+					},
+					buffer_visible = {
+						fg = gray,
+					},
+					separator = {
+						bg = "#1e1e2e",
+						fg = "#1e1e2e",
+					},
+					diagnostic = {},
+				},
 			})
 		end,
 	},

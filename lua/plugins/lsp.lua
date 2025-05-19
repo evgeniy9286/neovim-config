@@ -15,8 +15,7 @@ end,
 			lspconfig.gopls.setup({
 				filetypes = { "go", "gomod", "gowork", "gotmpl" },
 			})
-			lspconfig.dockerls.setup({})
-			lspconfig.docker_compose_language_service.setup({})
+			lspconfig.sqlls.setup({})
 			lspconfig.cmake.setup({})
 			lspconfig.cssls.setup({
 				cmd = { "vscode-css-language-server", "--stdio" },
