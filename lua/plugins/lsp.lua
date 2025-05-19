@@ -2,8 +2,11 @@ return {
 	{
 		"neovim/nvim-lspconfig",
 		configg = function()
-    require("indentmini").setup() -- use default config
-end,
+			require("indentmini").setup() -- use default config
+		end,
+		configgg = function ()
+			require("golangci-lint-langserver").setup({})
+		end,
 		config = function()
 			require("nvim-autopairs").setup({
 				disable_filetype = { "TelescopePrompt", "vim" },
@@ -20,19 +23,19 @@ end,
 			lspconfig.cssls.setup({
 				cmd = { "vscode-css-language-server", "--stdio" },
 				filetypes = { "css", "scss", "less", "templ" },
-				init_options = {provideFormatter = true},
+				init_options = { provideFormatter = true },
 				root_markers = { "package.json", ".git" },
 				settings = {
-							 css = {
-									 validate = true
-								   },
-							 less = {
-									 validate = true
-									},
-						     scss = {
-									 validate = true
-								    }
-							}
+					css = {
+						validate = true
+					},
+					less = {
+						validate = true
+					},
+					scss = {
+						validate = true
+					}
+				}
 			})
 			lspconfig.cssmodules_ls.setup({
 				cmd = { "cssmodules-language-server", "--stdio" },
@@ -43,7 +46,7 @@ end,
 			lspconfig.vls.setup({})
 			lspconfig.ts_ls.setup({
 				cmd = { "typescript-language-server", "--stdio" },
-				filetypes = { "javascript", "javascriptreact", "javascript.jsx", "typescript", "typescriptreact", "typescript.tsx"},
+				filetypes = { "javascript", "javascriptreact", "javascript.jsx", "typescript", "typescriptreact", "typescript.tsx" },
 				root_markers = { "tsconfig.json", "jsconfig.json", "package.json", ".git" }
 			})
 			vim.cmd([[colorscheme tokyonight]])
