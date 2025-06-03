@@ -4,7 +4,7 @@ return {
 		configg = function()
 			require("indentmini").setup() -- use default config
 		end,
-		configgg = function ()
+		configgo = function()
 			require("golangci-lint-langserver").setup({})
 		end,
 		config = function()
@@ -12,6 +12,13 @@ return {
 				disable_filetype = { "TelescopePrompt", "vim" },
 			})
 			local lspconfig = require("lspconfig")
+			local servers = { 'gopls', 'ccls', 'cmake', 'templ' }
+			for _, lsp in ipairs(servers) do
+				lspconfig[lsp].setup({
+					on_attach = on_attach,
+					capabilities = capabilities,
+				})
+			end
 			lspconfig.lua_ls.setup({
 				settings = { Lua = { diagnostics = { globals = { "vim", "require" } } } },
 			})
@@ -20,34 +27,53 @@ return {
 			})
 			lspconfig.sqlls.setup({})
 			lspconfig.cmake.setup({})
-			lspconfig.cssls.setup({
-				cmd = { "vscode-css-language-server", "--stdio" },
-				filetypes = { "css", "scss", "less", "templ" },
-				init_options = { provideFormatter = true },
-				root_markers = { "package.json", ".git" },
-				settings = {
-					css = {
-						validate = true
-					},
-					less = {
-						validate = true
-					},
-					scss = {
-						validate = true
-					}
-				}
-			})
-			lspconfig.cssmodules_ls.setup({
-				cmd = { "cssmodules-language-server", "--stdio" },
-				filetypes = { "javascript", "javascriptreact", "typescript", "typescriptreact", "templ" },
-				root_markers = { "package.json" }
-			})
-			lspconfig.css_variables.setup({})
 			lspconfig.vls.setup({})
 			lspconfig.ts_ls.setup({
 				cmd = { "typescript-language-server", "--stdio" },
 				filetypes = { "javascript", "javascriptreact", "javascript.jsx", "typescript", "typescriptreact", "typescript.tsx" },
 				root_markers = { "tsconfig.json", "jsconfig.json", "package.json", ".git" }
+			})
+			local capabilities = vim.lsp.protocol.make_client_capabilities()
+			capabilities.textDocument.completion.completionItem.snippetSupport = true
+			lspconfig.cssls.setup({
+				capabilities = capabilities,
+			})
+			lspconfig.html.setup({
+				on_attach = on_attach,
+				capabilities = capabilities,
+				filetypes = { "html", "templ" },
+			})
+			lspconfig.htmx.setup({
+				on_attach = on_attach,
+				capabilities = capabilities,
+				filetypes = { "html", "templ" },
+			})
+			lspconfig.tailwindcss.setup({
+				on_attach = on_attach,
+				capabilities = capabilities,
+				filetypes = { "templ", "astro", "javascript", "typescript", "react" },
+				settings = {
+					tailwindCSS = {
+						includeLanguages = {
+							templ = "html",
+						},
+					},
+				},
+			})
+			lspconfig.dockerls.setup({
+				cmd = { "docker-langserver", "--stdio" },
+				filetypes = { "dockerfile" },
+				root_markers = { "Dockerfile" }
+			})
+			lspconfig.docker_compose_language_service.setup({
+				cmd = { "docker-compose-langserver", "--stdio" },
+				filetypes = { "yaml.docker-compose" },
+				root_markers = { "docker-compose.yaml", "docker-compose.yml", "compose.yaml", "compose.yml" }
+			})
+			lspconfig.postgres_lsp.setup({
+				cmd = { "postgrestools", "lsp-proxy" },
+				filetypes = { "sql" },
+				root_markers = { "postgrestools.jsonc" }
 			})
 			vim.cmd([[colorscheme tokyonight]])
 			vim.api.nvim_create_autocmd("LspAttach", {
