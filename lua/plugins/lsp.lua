@@ -4,9 +4,9 @@ return {
 		configg = function()
 			require("indentmini").setup() -- use default config
 		end,
-		configgo = function()
-			require("golangci-lint-langserver").setup({})
-		end,
+		--	configgo = function()
+		--		require("golangci-lint-langserver").setup({})
+		--		end,
 		config = function()
 			require("nvim-autopairs").setup({
 				disable_filetype = { "TelescopePrompt", "vim" },
@@ -48,18 +48,6 @@ return {
 				capabilities = capabilities,
 				filetypes = { "html", "templ" },
 			})
-			lspconfig.tailwindcss.setup({
-				on_attach = on_attach,
-				capabilities = capabilities,
-				filetypes = { "templ", "astro", "javascript", "typescript", "react" },
-				settings = {
-					tailwindCSS = {
-						includeLanguages = {
-							templ = "html",
-						},
-					},
-				},
-			})
 			lspconfig.dockerls.setup({
 				cmd = { "docker-langserver", "--stdio" },
 				filetypes = { "dockerfile" },
@@ -74,6 +62,38 @@ return {
 				cmd = { "postgrestools", "lsp-proxy" },
 				filetypes = { "sql" },
 				root_markers = { "postgrestools.jsonc" }
+			})
+			lspconfig.css_variables.setup({
+				cmd = { "css-variables-language-server", "--stdio" },
+				filetypes = { "css", "scss", "less", "templ" },
+				root_markers = { "package.json", ".git" }
+			})
+			lspconfig.tailwindcss.setup({
+				cmd = { "tailwindcss-language-server", "--stdio" },
+				filetypes = { "aspnetcorerazor", "astro", "astro-markdown", "blade", "clojure", "django-html", "htmldjango", "edge", "eelixir", "elixir", "ejs", "erb", "eruby", "gohtml", "gohtmltmpl", "haml", "handlebars", "hbs", "html", "htmlangular", "html-eex", "heex", "jade", "leaf", "liquid", "markdown", "mdx", "mustache", "njk", "nunjucks", "php", "razor", "slim", "twig", "css", "less", "postcss", "sass", "scss", "stylus", "sugarss", "javascript", "javascriptreact", "reason", "rescript", "typescript", "typescriptreact", "vue", "svelte", "templ" },
+				settings = {
+					tailwindCSS = {
+						classAttributes = { "class", "className", "class:list", "classList", "ngClass" },
+						includeLanguages = {
+							eelixir = "html-eex",
+							elixir = "phoenix-heex",
+							eruby = "erb",
+							heex = "phoenix-heex",
+							htmlangular = "html",
+							templ = "html"
+						},
+						lint = {
+							cssConflict = "warning",
+							invalidApply = "error",
+							invalidConfigPath = "error",
+							invalidScreen = "error",
+							invalidTailwindDirective = "error",
+							invalidVariant = "error",
+							recommendedVariantOrder = "warning"
+						},
+						validate = true
+					}
+				}
 			})
 			vim.cmd([[colorscheme tokyonight]])
 			vim.api.nvim_create_autocmd("LspAttach", {
